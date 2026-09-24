@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ethan McCaffrey - Portfolio</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Rubik:wght@400;500;600;700&display=swap">
+
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <canvas id="wall"></canvas>
+        <div id="wall-tint"></div>
+        <div class="grain"></div>
+
+        <div class="wrap">
+            <header class="masthead">
+                <div class="sunburst"></div>
+                <div class="brand">
+                    <p class="eyebrow">Games Programmer</p>
+                    <h1>Ethan<br>McCaffrey</h1>
+                    <p class="tagline">Fourth Year Computer Games Application Development student at Abertay, working with Unity 6, Unreal Engine 5 and DirectX 11. Graphics programming, gameplay mechanics, AI programming.</p>
+                </div>
+                <div class="contact">
+                    <a href="https://github.com/2303621" target="_blank" rel="noopener">github.com/2303621</a>
+                    <a href="mailto:ethanmccaffrey2003@gmail.com">ethanmccaffrey2003@gmail.com</a>
+                </div>
+            </header>
+
+            <main class="shelf" id="shelf"></main>
+        </div>
+
+        <section class="player" id="player" aria-hidden="true">
+            <div class="player-bg" aria-hidden="true"></div>
+            <div class="player-scroll">
+
+                <div class="player-top">
+                    <button class="back" id="back">&lsaquo; Back to shelf</button>
+                    <span class="player-ctx" id="player-ctx">University Modules</span>
+                </div>
+
+                <div class="hero">
+                    <div class="stage">
+                        <div class="disc"></div>
+                        <div class="player-art art cv-prism"></div>
+                    </div>
+
+                    <div class="player-info">
+                        <p class="player-kicker">Individual Project</p>
+                        <h2 class="player-title">PRISM</h2>
+                        <p class="player-sub">Music-embodiment visualiser</p>
+                        <p class="player-tech">Unity 6 &middot; C# &middot; Python</p>
+
+                        <div class="scrub">
+                            <div class="scrub-bar"><span id="player-progress"></span></div>
+                            <div class="scrub-time"><span id="player-time">1:24</span><span id="player-year">2026</span></div>
+                        </div>
+
+                        <div class="controls">
+                            <button id="prev" aria-label="Previous project"><svg viewBox="0 0 24 24"><path d="M7 6h2v12H7zM9 12l10 6V6z"/></svg></button>
+                            <button class="play" aria-label="Play (decorative)"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+                            <button id="next" aria-label="Next project"><svg viewBox="0 0 24 24"><path d="M15 6h2v12h-2zM6 18l10-6L6 6z"/></svg></button>
+                            <a class="gh" id="player-link" href="#" target="_blank" rel="noopener"></a>
+                        </div>
+
+                        <p class="player-blurb"></p>
+                        <div class="tags" id="player-tags"></div>
+                    </div>
+
+                    <div class="cue" id="player-cue" hidden>
+                        <button type="button" id="cue-btn"><span></span><span class="arr">&darr;</span></button>
+                    </div>
+                </div>
+                <section class="sleeve-back" id="player-sleeve" hidden></section>
+
+            </div>
+        </section>
+
+        <script src="script.js"></script>
+    </body>
+</html>
+
+
