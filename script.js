@@ -48,12 +48,12 @@ const projects = [
     kicker: "Happy Golem Games",
     year: "2026",
     github: "#",
-    itch: "https://happy-golem-games.itch.io/happy-golem-315",                     
-    time: "3:15",                   
-    progress: 56,                    
+    itch: "https://happy-golem-games.itch.io/happy-golem-315",
+    time: "3:15",
+    progress: 56,
     tags: ["Unity 6", "C#", "Team", "Procedural Gen", "NavMesh AI"],
     blurb: "A gothic top-down roguelike built in Unity 6 with a seven-person team, where I developed core, tools and gameplay features including procedural dungeon generation and NavMesh-driven enemy AI among the systems I built.",
-  
+
     liner: [
       "Incinder is a gothic top-down roguelike built over 4 months with Happy Golem Games, a seven-person team. Every run drops the player into a fresh, procedurally built dungeon and challenges them to fight their way down through it.",
       "I worked across core, tools and gameplay. The two systems I'm proudest of are the procedural dungeon generation which stitches rooms into a coherent, playable layout every seed, and the NavMesh-driven enemy AI that hunts the player through it. Building tooling alongside the game meant the rest of the team could design levels and tune encounters without touching the underlying code."
@@ -64,6 +64,8 @@ const projects = [
       ["Built with", "Unity 6, C#"],
       ["Year", "2026"]
     ],
+    video: "images/incinder-gameplay.mp4",
+    poster: "images/incinder-gameplay.jpg",
     photos: ["images/incinder-combat.png", "images/incinder-inventory.png"],
     logo: "images/happy-golem.png"
   },
@@ -155,7 +157,7 @@ const playerYear = document.getElementById("player-year");
 const playerTime = document.getElementById("player-time");
 const playerProg = document.getElementById("player-progress");
 const playerTags = document.getElementById("player-tags");
-const playerCue = document.getElementById("player-cue");
+const playerInsert = document.getElementById("player-insert");
 const sleeveBack = document.getElementById("player-sleeve");
 
 const ICON_ITCH = '<svg viewBox="0 0 24 24"><path d="M3 5h18v14H3zM7 9v6l5-3z"/></svg>';
@@ -178,7 +180,7 @@ function openPlayer(index) {
   playerProg.style.right = (100 - (p.progress ?? 40)) + "%";
 
   playerTags.innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join("");
-  playerArt.className   = "player-art art " + p.coverClass;   
+  playerArt.className   = "player-art art " + p.coverClass;
 
 
   if (p.itch) {
@@ -187,6 +189,17 @@ function openPlayer(index) {
   } else {
     playerLink.href = p.github || "#";
     playerLink.innerHTML = ICON_GH + " View on GitHub";
+  }
+
+  if (p.video) {
+    playerInsert.innerHTML = `
+      <div class="insert-card">
+        <video src="${p.video}"${p.poster ? ` poster="${p.poster}"` : ""} autoplay muted loop playsinline></video>
+      </div>`;
+    playerInsert.hidden = false;
+  } else {
+    playerInsert.innerHTML = "";
+    playerInsert.hidden = true;
   }
 
   if (p.liner) {
@@ -203,11 +216,9 @@ function openPlayer(index) {
       <div class="photos">${photos}</div>
       ${logo}`;
     sleeveBack.hidden = false;
-    playerCue.hidden  = false;
   } else {
     sleeveBack.innerHTML = "";
     sleeveBack.hidden = true;
-    playerCue.hidden  = true;
   }
 
   player.classList.add("open");
@@ -232,9 +243,6 @@ shelf.addEventListener("click", (e) => {
 document.getElementById("back").addEventListener("click", closePlayer);
 document.getElementById("next").addEventListener("click", nextProject);
 document.getElementById("prev").addEventListener("click", prevProject);
-document.getElementById("cue-btn").addEventListener("click", () => {
-  sleeveBack.scrollIntoView({ behavior: "smooth", block: "start" });
-});
 
 document.addEventListener("keydown", (e) => {
   if (!player.classList.contains("open")) return;
@@ -251,9 +259,9 @@ const STRIPES = ["#e6b34a", "#9bb06a", "#2f7d8a", "#df6a2e", "#efdcb0", "#e59a4c
 function drawWall() {
   const W = wall.width = innerWidth;
   const H = wall.height = innerHeight;
-  const sw = Math.max(46, W / 16);  
-  const amp = sw * 0.85;            
-  const k = 6.283 / (H / 2.3);      
+  const sw = Math.max(46, W / 16);
+  const amp = sw * 0.85;
+  const k = 6.283 / (H / 2.3);
   for (let y = 0; y < H; y += 3) {
     const off = Math.sin(y * k) * amp;
     for (let i = -3; i * sw < W + sw + amp; i++) {
