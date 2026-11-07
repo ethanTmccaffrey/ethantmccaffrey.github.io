@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethan McCaffrey - CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --face:#dccdae; --gray-d:#a2957a; --shadow:#4a3a22;
+  --title1:#7a2f18; --title2:#c8452a;
+  --paper:#f2e6c9; --ink:#33210f;
+  --ui:"Tahoma",Verdana,Geneva,sans-serif;
+  --pix:"Pixelify Sans","Tahoma",sans-serif;
+}
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{margin:0;font-family:var(--ui);color:var(--ink);overflow-x:hidden;background:var(--paper);}
+#wall{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+.rain{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;}
+.disc{position:absolute;top:-16vh;border-radius:50%;pointer-events:none;opacity:.9;
+  background:
+    radial-gradient(circle at 50% 50%, #0a0a0a 0 7%, #cf4a2a 8% 20%, #0a0a0a 21% 24%, transparent 24%),
+    repeating-radial-gradient(circle at 50% 50%, #191919 0 1.5px, #2a2a2a 1.5px 3px);
+  box-shadow:2px 3px 4px #0004, inset 0 0 5px #0006, 0 0 0 1px #f2e6c94d;
+  animation:fall linear infinite;}
+@keyframes fall{ to{ transform:translateY(128vh) rotate(560deg);} }
+
+.bevel-out{border:2px solid;border-color:#fff var(--shadow) var(--shadow) #fff;
+  box-shadow:inset 1px 1px 0 var(--face), inset -1px -1px 0 var(--gray-d);}
+.bevel-in{border:2px solid;border-color:var(--shadow) #fff #fff var(--shadow);
+  box-shadow:inset 1px 1px 0 var(--gray-d), inset -1px -1px 0 var(--face);}
+
+.desktop{position:relative;z-index:2;min-height:100vh;padding:clamp(20px,4vw,54px) clamp(12px,3vw,40px) 70px;display:flex;justify-content:center;}
+.window{width:min(960px,100%);background:var(--face);border:2px solid;border-color:#fff var(--shadow) var(--shadow) #fff;
+  box-shadow:inset 1px 1px 0 #efe4c8, inset -1px -1px 0 var(--gray-d), 4px 5px 0 #33210f55;align-self:flex-start;}
+.titlebar{display:flex;align-items:center;gap:8px;padding:4px 4px 4px 7px;
+  background:linear-gradient(90deg,var(--title1),var(--title2));color:var(--paper);}
+.titlebar .ico{width:16px;height:16px;background:#ffd94a;border:1px solid #000;position:relative;flex:0 0 auto;}
+.titlebar .ico::after{content:"";position:absolute;inset:3px 3px auto 3px;height:2px;background:#000;box-shadow:0 3px 0 #000,0 6px 0 #000;}
+.title{font-family:var(--pix);font-weight:700;font-size:1rem;letter-spacing:.02em;flex:1;text-shadow:1px 1px 0 #00000060;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tbtns{display:flex;gap:3px;}
+.tbtn{width:20px;height:20px;background:var(--face);display:grid;place-items:center;font-family:var(--pix);font-weight:700;font-size:.8rem;line-height:1;cursor:default;}
+
+.menubar{display:flex;gap:2px;padding:3px 4px;font-family:var(--ui);font-size:.85rem;border-bottom:1px solid var(--gray-d);}
+.menubar span{padding:2px 9px;}
+.menubar span u{text-decoration:underline;}
+
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px;}
+.osbtn{font-family:var(--ui);font-size:.86rem;background:var(--face);color:#000;text-decoration:none;
+  padding:6px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;}
+.osbtn:active{border-color:#000 #fff #fff #000 !important;}
+.osbtn.current,.osbtn.primary{font-weight:700;}
+.spacer{flex:1;}
+
+.win-body{padding:8px;}
+.doc-frame{background:#fff;}
+.doc-frame iframe{display:block;width:100%;height:74vh;border:0;background:#fff;}
+.doc-fallback{font-family:var(--ui);font-size:.8rem;text-align:center;padding:8px;}
+.win-status{display:flex;justify-content:space-between;font-family:var(--ui);font-size:.78rem;padding:5px 8px;gap:8px;}
+.win-status .cell{padding:2px 8px;}
+
+.taskbar{position:fixed;left:0;right:0;bottom:0;height:38px;z-index:5;display:flex;align-items:center;gap:8px;padding:4px 6px;
+  background:var(--face);border-top:2px solid #fff;}
+.start{font-family:var(--pix);font-weight:700;font-size:.95rem;padding:4px 14px 4px 10px;display:flex;align-items:center;gap:8px;cursor:default;}
+
+.start .flag{width:22px;height:13px;border:1px solid #00102e;
+  background:
+    linear-gradient(0deg, transparent 38%, #cf142b 38% 62%, transparent 62%),
+    linear-gradient(90deg, transparent 38%, #cf142b 38% 62%, transparent 62%),
+    linear-gradient(0deg, transparent 30%, #fff 30% 70%, transparent 70%),
+    linear-gradient(90deg, transparent 30%, #fff 30% 70%, transparent 70%),
+    linear-gradient(45deg, transparent 46%, #cf142b 46% 54%, transparent 54%),
+    linear-gradient(-45deg, transparent 46%, #cf142b 46% 54%, transparent 54%),
+    linear-gradient(45deg, transparent 40%, #fff 40% 60%, transparent 60%),
+    linear-gradient(-45deg, transparent 40%, #fff 40% 60%, transparent 60%),
+    #012169;}
+.task-open{flex:1;max-width:240px;font-size:.82rem;padding:5px 10px;display:flex;align-items:center;gap:7px;}
+.task-open .mini{width:14px;height:14px;background:#ffd94a;border:1px solid #000;flex:0 0 auto;}
+.tray{font-family:var(--ui);font-size:.8rem;padding:5px 12px;}
+</style>
+</head>
+<body>
+<canvas id="wall"></canvas>
+<div class="rain" id="rain"></div>
+
+<div class="desktop">
+  <div class="window">
+    <div class="titlebar">
+      <span class="ico"></span>
+      <span class="title">EthanMcCaffrey_CV_2026 — Portfolio Explorer</span>
+      <span class="tbtns">
+        <a class="tbtn bevel-out" href="index.html" title="Back to shelf">_</a>
+        <span class="tbtn bevel-out">▢</span>
+        <a class="tbtn bevel-out" href="index.html" title="Close">✕</a>
+      </span>
+    </div>
+
+    <div class="menubar">
+      <span><u>F</u>ile</span><span><u>E</u>dit</span><span><u>V</u>iew</span><span><u>H</u>elp</span>
+    </div>
+
+    <div class="toolbar">
+      <a class="osbtn bevel-out primary" href="assets/EthanMcCaffrey_CV_2026.pdf" download>Download CV
+        <svg class="dl-ico" viewBox="0 0 24 24" width="15" height="15"><path d="M12 3v10m0 0l-4-4m4 4l4-4M5 20h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <span class="spacer"></span>
+      <a class="osbtn bevel-out" href="index.html">Work</a>
+      <a class="osbtn bevel-out" href="blog.html">Blog</a>
+      <a class="osbtn bevel-in current" href="cv.html">CV</a>
+    </div>
+
+    <div class="win-body">
+      <div class="doc-frame bevel-in">
+        <iframe title="Ethan McCaffrey CV" src="assets/EthanMcCaffrey_CV_2026.pdf#toolbar=0&navpanes=0&view=FitH"></iframe>
+        <p class="doc-fallback">Can't see the CV? <a href="assets/EthanMcCaffrey_CV_2026.pdf" target="_blank" rel="noopener">Open it in a new window.</a></p>
+      </div>
+    </div>
+
+    <div class="win-status">
+      <span class="cell bevel-in">Ready</span>
+      <span class="cell bevel-in">EthanMcCaffrey_CV_2026.pdf</span>
+      <span class="cell bevel-in">Portfolio</span>
+    </div>
+  </div>
+</div>
+
+<div class="taskbar">
+  <span class="start bevel-out"><span class="flag"></span>Start</span>
+  <span class="task-open bevel-in"><span class="mini"></span>EthanMcCaffrey_CV…</span>
+  <span class="tray bevel-in" id="clock">--:--</span>
+</div>
+
+<script>
+  function tick(){
+    const d=new Date();
+    document.getElementById('clock').textContent =
+      d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');
+  }
+  tick(); setInterval(tick,10000);
+
+  const wall = document.getElementById("wall");
+  const wx = wall.getContext("2d");
+  const STRIPES = ["#e6b34a", "#9bb06a", "#2f7d8a", "#df6a2e", "#efdcb0", "#e59a4c", "#c14a2b"];
+  function drawWall() {
+    const W = wall.width = innerWidth;
+    const H = wall.height = innerHeight;
+    const sw = Math.max(46, W / 16);
+    const amp = sw * 0.85;
+    const k = 6.283 / (H / 2.3);
+    for (let y = 0; y < H; y += 3) {
+      const off = Math.sin(y * k) * amp;
+      for (let i = -3; i * sw < W + sw + amp; i++) {
+        wx.fillStyle = STRIPES[((i % STRIPES.length) + STRIPES.length) % STRIPES.length];
+        wx.fillRect(i * sw + off, y, sw + 1, 4);
+      }
+    }
+  }
+  drawWall();
+  addEventListener("resize", drawWall);
+
+  const rain = document.getElementById('rain');
+  for (let i = 0; i < 11; i++) {
+    const d = document.createElement('div');
+    d.className = 'disc';
+    const size = 26 + Math.random() * 44;
+    d.style.width = d.style.height = size + 'px';
+    d.style.left = (Math.random() * 100) + 'vw';
+    d.style.animationDuration = (8 + Math.random() * 9) + 's';
+    d.style.animationDelay = (-Math.random() * 16) + 's';
+    rain.appendChild(d);
+  }
+</script>
+</body>
+</html>
