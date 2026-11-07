@@ -50,6 +50,18 @@
 .note .tags span{font-family:var(--text);font-weight:600;font-size:.56rem;letter-spacing:.05em;text-transform:uppercase;
   border:1.5px solid var(--ink);border-radius:100px;padding:2px 9px;}
 .note .rt{font-family:var(--hand);font-size:1.1rem;color:var(--accent);position:absolute;right:14px;bottom:8px;transform:rotate(-4deg);}
+.soundtrack{display:flex;align-items:center;gap:22px;margin-top:2.4rem;padding-top:1.8rem;border-top:2px dashed var(--line);}
+.sound-disc{flex:0 0 auto;width:86px;aspect-ratio:1;border-radius:50%;border:3px solid var(--ink);box-shadow:4px 5px 0 var(--ink);
+  background:
+    radial-gradient(circle, var(--paper) 0 4%, var(--accent) 4% 24%, var(--ink) 24% 27%, transparent 27%),
+    repeating-radial-gradient(circle, #1a0e06 0 3px, #2e1c10 3px 5px);}
+.soundtrack:hover .sound-disc{animation:spin 3s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+@media (prefers-reduced-motion:reduce){.soundtrack:hover .sound-disc{animation:none;}}
+.sound-label{font-family:var(--hand);font-size:1.35rem;color:var(--accent);margin:0;}
+.sound-title{font-family:var(--display);font-size:1.8rem;line-height:1;margin:.15rem 0 .25rem;}
+.sound-artist{font-weight:600;font-size:1rem;margin:0;opacity:.8;}
+.note .tags{padding-right:52px;}
 
 .blog-state{text-align:center;padding:44px 20px;font-size:1.05rem;line-height:1.6;color:var(--paper);text-shadow:1px 1px 0 #0006;}
 .blog-state code{background:#0004;padding:2px 7px;border-radius:4px;font-family:var(--mono);font-size:.85em;}
